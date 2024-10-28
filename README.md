@@ -2,6 +2,23 @@
 
 Forked from supabase/supabase-js, the origional documentation can be found [here](https://supabase.github.io/supabase/supabase-js).
 
+## Changes
+
+Changes are made on top of <https://github.com/supabase/supabase-js/commit/ce1e2f0729068a2bcd794cc3937da07d5d38677e>
+
+- feat: add submodule `supbase-wx/auth-js` as a workspace package
+  - ci: remove workflows
+  - ci: ignore generated `lib/version` file on build, remove actions
+  - feat: update `node-fetch` dependency, mute navigator lock
+- feat: add submodule `supabase-wx/node-fetch` as a workspace package
+  - ci: remove workflows
+  - fix(browser.js): remove wx incompatible node fetch binding
+- feat: dd submodule `supabase-wx/postgrest-js` as a workspace package
+  - ci: remove workflows
+  - feat: update node-fetch dependency
+- feat: add wx fetch implementation
+- ci: update release workflow
+
 ## Usage
 
 ```ts
