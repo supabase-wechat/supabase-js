@@ -4,7 +4,7 @@ Forked from supabase/supabase-js, the origional documentation can be found [here
 
 ## Changes
 
-Changes are made on top of [this commit from @supabase/supabase-js, base version number v2.46.1](https://github.com/supabase/supabase-js/commit/ce1e2f0729068a2bcd794cc3937da07d5d38677e), you can freely update the fork base and apply the following changes
+Changes are made on top of [this commit from @supabase/supabase-js, base version number v2.46.1](https://github.com/supabase/supabase-js/commit/ce1e2f0729068a2bcd794cc3937da07d5d38677e)
 
 - feat: add submodule `supbase-wx/auth-js` as a workspace package
   - ci: remove workflows
@@ -19,7 +19,8 @@ Changes are made on top of [this commit from @supabase/supabase-js, base version
 - fix: add polyfills for `AbortController`, `localStorage` and `Headers`, see `wx/polyfills`
 - feat: add wx fetch implementation
 - feat: add wx `SocketTask` implementation for realtime subscription
-- ci: update release workflow
+
+Currently there is no plan to publish package versions based on these changes. To actively align every upcoming official supabase-js versions are meaningless. You can freely update the fork base locally as needed, and apply the above changes or use them as a reference.
 
 ## Usage
 
