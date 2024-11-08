@@ -6,10 +6,18 @@ Forked from supabase/supabase-js, the origional documentation can be found [here
 
 Changes are made on top of [this commit from @supabase/supabase-js, base version number v2.46.1](https://github.com/supabase/supabase-js/commit/ce1e2f0729068a2bcd794cc3937da07d5d38677e)
 
-- feat: add submodule `packages/node-fetch` as a workspace package
-  - fixes `@supabase/node-fetch`, which is statically imported in more than one `@supabase/` libs, which will throw `binding` errors in wx.
-  - ci: remove workflows
+- add submodule `packages/node-fetch` as a workspace package
+
   - fix(browser.js): remove wx incompatible node fetch binding
+
+  related issues: <https://github.com/supabase/postgrest-js/issues/574>, <https://github.com/supabase/supabase-js/issues/1303>
+
+- add submodule `packages/realtime-js` as a workspace package
+
+  - fix: add missing `setupConnection()` when using custom `transport` in `RealtimeClient`
+
+  related discussion: <https://github.com/orgs/supabase/discussions/30361>
+
 - fix(`src/wx/polyfills`): add polyfills for `AbortController`, `localStorage` and `Headers`
   - polyfills are dynamically imported in `src/lib/index > createClient`
 - fix(`src/wx/navigator-lock`): add navigator lock polyfill.
@@ -68,17 +76,43 @@ There may not be plan to publish package versions based on these changes. To act
 
 ## Usage
 
-### Add `@supabase/node-fetch` resolution
+### Add `@supabase/node-fetch` and `@supabase/realtime-js` resolutions
+
+#### Background
+
+- <https://github.com/orgs/supabase/discussions/30361>
+- <https://github.com/supabase/postgrest-js/issues/574>
+- <https://github.com/supabase/supabase-js/issues/1303>
+
+Before the above issues and discussions are officially resolved, changes are made and resolved locally.
+
+#### Prepare
+
+```sh
+cd path/to/@supabase-wechat/supabase-js
+git submodule update --init [--recursive]
+```
+
+#### Add resolution
 
 In your `root/path/to/package.json`, add the following resolution for yarn ([The resolutions field can only be set at the root of the project, and will generate a warning if used in any other workspace.](https://yarnpkg.com/configuration/manifest#resolutions))
 
 ```json
 {
-  // ...
   "resolutions": {
-    "@supabase/node-fetch": "portal:./path/to/supabase-wx/packages/node-fetch"
+    "@supabase/node-fetch": "portal:./path/to/@supabase-wechat/supabase-js/packages/node-fetch",
+    "@supabase/realtime-js": "portal:./path/to/@supabase-wechat/supabase-js/packages/realtime-js"
   }
 }
+```
+
+### Install
+
+```sh
+cd project_rood; yarn install
+cd path/to/@supabase-wechat/supabase-js/packages/node-fetch; npm run build
+cd path/to/@supabase-wechat/supabase-js/packages/realtime-js; npm run build
+cd path/to/@supabase-wechat/supabase-js/; npm run build
 ```
 
 ### Configure supabase client
