@@ -66,8 +66,9 @@ Changes are made on top of [this commit from @supabase/supabase-js, base version
   new SupabaseClient(url, key, {
     ...options,
     realtime: {
-      transport: WxSocketTask,
+      transport: WxRealtimeTransport,
       ...(extraOptions.realtime ?? {}),
+      worker: false,
     },
   })
   ```

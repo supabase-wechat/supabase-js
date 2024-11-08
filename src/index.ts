@@ -1,11 +1,11 @@
 import { wxFetchSb } from './wx/fetch'
 import { createWxCloudFetchSb } from './wx/fetch-cloud'
-import { WxSocketTask } from './wx/socket-task'
-import { navigatorLockNoOp } from './wx/navigator-lock'
 import { wxLocalStorage } from './wx/local-storage'
+import { navigatorLockNoOp } from './wx/navigator-lock'
 
 import SupabaseClient from './SupabaseClient'
 import type { GenericSchema, SupabaseClientOptions } from './lib/types'
+import { WxRealtimeTransport } from './wx/realtime-transport'
 
 export * from '@supabase/auth-js'
 export type { User as AuthUser, Session as AuthSession } from '@supabase/auth-js'
@@ -67,8 +67,9 @@ export const createClient = <
   return new SupabaseClient<Database, SchemaName, Schema>(supabaseUrl, supabaseKey, {
     ...extraOptions,
     realtime: {
-      transport: WxSocketTask,
+      transport: WxRealtimeTransport,
       ...(extraOptions.realtime ?? {}),
+      worker: false,
     },
     auth: {
       storage: wxLocalStorage,
